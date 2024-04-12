@@ -1,12 +1,55 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Google Trend</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Form</title>
 </head>
 <body>
-<h1></h1>
-<p></p>
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3620_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderWidget("dailytrends", "", {"geo":"HK","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+    <form id="notionForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const notionForm = document.getElementById('notionForm');
+        
+        notionForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            // Call the backend script to save data to Notion
+            await saveToNotion(name, email);
+        });
+
+        async function saveToNotion(name, email) {
+            const url = 'http://localhost:3000/submit-to-notion'; // Update with your server URL
+
+            await fetch(url, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to save data to Notion.');
+            });
+        }
+    </script>
 </body>
 </html>
