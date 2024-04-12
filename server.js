@@ -1,5 +1,5 @@
 const express = require('express');
-const fetch = require('node-fetch');
+const fetch = require('node-fetch-commonjs');
 const bodyParser = require('body-parser');
 
 const app = express();
