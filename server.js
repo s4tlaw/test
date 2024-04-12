@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 app.post('/submit-to-notion', async (req, res) => {
     try {
         const { name, email } = req.body;
-        const notionDatabaseId = 'YOUR_NOTION_DB';
-        const integrationToken = 'YOUR_NOTION_SECRET';
+        const notionDatabaseId = 'c24d7b2e847448c08cf298a182f1285b';
+        const integrationToken = 'secret_lFvjG6V5rtoL1T7rHmZ6twLYaFeXRhRVHwex6CzFYrJ';
 
         const url = `https://api.notion.com/v1/pages`;
 
@@ -19,7 +19,7 @@ app.post('/submit-to-notion', async (req, res) => {
             parent: { database_id: notionDatabaseId },
             properties: {
                 Name: { title: [{ text: { content: name } }] },
-                Email: { email: email }
+                Email: { text1: email }
                 // Add more properties based on your Notion database schema
             }
         };
