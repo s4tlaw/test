@@ -19,7 +19,7 @@ app.post('/submit-to-notion', async (req, res) => {
             parent: { database_id: notionDatabaseId },
             properties: {
                 Name: { title: [{ text: { content: name } }] },
-                text1: { text1: text1 }
+                Email: { email: email }
                 // Add more properties based on your Notion database schema
             }
         };
